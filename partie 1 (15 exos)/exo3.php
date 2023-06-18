@@ -4,7 +4,9 @@
 <?php
 // Déclaration de la chaine de caractère
 $sentenceData = "<< Notre formation DL commence aujourd'hui >>";
-$newSentenceData = str_replace("aujourd'hui", "demain", $sentenceData);
+
+//on remplace "aujourd'hui" par "demain" dans le texte contenu dans $sentenceData
+$newSentenceData = str_replace("aujourd'hui", "demain", $sentenceData); 
 
 echo "La phrase :<br>".$sentenceData ."<br>devient : <br>".$newSentenceData ;
 

@@ -6,8 +6,12 @@ Affichage (si la date courante est le 21/05/2018 et la date de naissance le
 <h2>Résultat</h2>
 
 <?php
+//declaration des variables
+$birthDate = "17/01/1985";
+$currentDate = "21/05/2018";
+
 //cette fonction fonctionne avec les dates en notations anglaise Year-Month-Day
-function CalculerDiffDate($birthDate,$currentDate)
+function afficheAge($birthDate,$currentDate)
 {
 //On déclare les dates à comparer
 $dateNais = new DateTime($birthDate);
@@ -16,18 +20,31 @@ $dateJour = new DateTime($currentDate);
 //On calcule la différence
 $difference = $dateNais->diff($dateJour);
 
+//Affichage du résultat en année, mois et jour grâce à la methode format:
+ echo $difference->format('%Y')." ans, ".$difference->format('%m')." mois, ".$difference->format('%d')." jours.\n";
+
 //On retourne la différence en années
-return $difference->format('%Y');
+//return $difference->format('%Y');
 }
 
-$birthDayFr = "17/01/1985";
-$currentDateFr = "21/05/2018";
 
-$originalDate = "2020-04-29";
+//conversion des dates du format "jj/mm/aaaa" au format "yyyy-mm-dd" 
+function convertDate($dateFr){
+// on passe de "jj/mm/yyyy" à "jj-mm-yyyy"
+$date1 = str_ireplace("/","-",$dateFr);
 
-$DateTime = DateTime::createFromFormat('d-m-Y', $birthDayFr);
-$newDate = $DateTime->format('Y-m-d');
+$date=date_create($date1);
+return $newDate = date_format($date,"Y-m-d"); //renvoie la date avec le format qu'on veut "yyyy-mm-dd"
 
-echo "The old date is $birthday. ";
-echo "The new date is $newDate.";
+}
+
+echo "Date du jour : $currentDate - en format standard : ".convertDate($currentDate)."<br>";
+echo "Date de naissance : $birthDate : - en format standard : ".convertDate($birthDate)."<br>";
+
+
+echo afficheAge(convertDate($birthDate),convertDate($currentDate));
+
+
+
+
 

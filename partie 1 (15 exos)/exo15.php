@@ -13,13 +13,14 @@ Class Personne {
     private $_name ;           //les attributs de la classe personne
     private $_surname ;
     private $_birthdate ;
-
+    private $_age ;
 /* on définie ("constuit") la méthode "magique" qui permet d'initilaiser les attributs de chaque instance que nous allons créer avec " new Personne($name,$surname,$birthdate) " */
 
     public function __construct($name,$surname,$birthdate){
         $this->_name = $name;
         $this->_surname = $surname;
-        $this->_birthdate = $birthdate;        
+        $this->_birthdate = $birthdate; 
+              
     }
 
 /* On définit des methodes (un "getter") pour pouvoir accéder aux attributs d'une instance */
@@ -35,13 +36,28 @@ Class Personne {
     public function getBirthDate(){
         return $this->_birthdate;
     } 
+
+//Et une methode pour calculer l'age à partir de la date de naissance ;
+
+    public function CalculerAge()
+    {
+    //On déclare les dates à comparer
+    $dateNais = new DateTime($this->_birthdate);
+    $dateJour = new DateTime();
     
+    //On calcule la différence
+    $difference = $dateNais->diff($dateJour);
     
+    //On retourne la différence en années
+    return $difference->format('%Y');
+    }
 }
 
 //Création de 2 instances de la classe Personne :
 $p1 = new Personne("DUPONT", "Michel", "1980-02-19") ;
 $p2 = new Personne("DUCHEMIN", "Alice", "1985-01-17") ;
+
+/*
 
 function CalculerAge($date)
 {
@@ -56,7 +72,9 @@ $difference = $dateNais->diff($dateJour);
 return $difference->format('%Y');
 }
 
+*/
+
 // Affichage du Prénom Nom et l'age actuel de chaque instance Personne :
 
-echo $p1->getSurname()." ".$p1->getName()." a ".CalculerAge($p1->getBirthDate())." ans. <br><br>" ;
-echo $p2->getSurname()." ".$p2->getName()." a ".CalculerAge($p2->getBirthDate())." ans .<br><br>" ;
+echo $p1->getSurname()." ".$p1->getName()." a ".$p1->CalculerAge()." ans. <br><br>" ;
+echo $p2->getSurname()." ".$p2->getName()." a ".$p2->CalculerAge()." ans .<br><br>" ;
